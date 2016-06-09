@@ -5,3 +5,5 @@
 [user]
   name = John Bannister
   email = jdbann@gmail.com
+[credential]
+  helper = osxkeychain
