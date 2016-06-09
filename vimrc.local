@@ -1,0 +1,6 @@
+" Use Rubocop for checking ruby style with Syntastic
+let g:syntastic_ruby_checkers = ['rubocop']
+
+" Set Solarized as colour theme
+set background=dark
+colorscheme solarized
