@@ -1,3 +1,2 @@
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'altercation/vim-colors-solarized'
-Plug 'jaxbot/github-issues.vim'
