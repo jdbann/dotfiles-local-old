@@ -1,3 +1,11 @@
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'melonmanchan/vim-tmux-resizer'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-unimpaired'
+Plug 'Alok/notational-fzf-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'christoomey/vim-tmux-runner'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'vim-ruby/vim-ruby'
