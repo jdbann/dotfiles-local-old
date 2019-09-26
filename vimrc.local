@@ -10,4 +10,10 @@ let test#strategy = "dispatch"
 let g:ale_linters = {
 \   'sass': ['scss-lint'],
 \   'ruby': ['rubocop'],
+\   'javascript': ['prettier'],
+\}
+
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\   'javascript': ['prettier'],
 \}
