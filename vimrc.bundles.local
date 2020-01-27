@@ -2,7 +2,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-dispatch'
 Plug 'joshdick/onedark.vim'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
