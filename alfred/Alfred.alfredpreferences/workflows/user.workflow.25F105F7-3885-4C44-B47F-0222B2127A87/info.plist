@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.jdbann.diceroll</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>13819882-0F9E-45E6-B8D2-54544CA9D160</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6945E58A-206F-4B39-AE1B-109D65F5CABF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8E0FF21A-8EF6-40F4-A706-C750B366B63D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>13819882-0F9E-45E6-B8D2-54544CA9D160</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>John Bannister</string>
+	<key>description</key>
+	<string>Roll dice with standard dX notation</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Dice Roll</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query = ARGV[0].downcase
+
+class Parser
+  REGEX = /(?&lt;count&gt;[0-9]*) ?d ?(?&lt;dice&gt;[0-9]+) ?(?&lt;modifier&gt;[+-][0-9]+)? ?(?:(?&lt;adv&gt;adv)|(?&lt;dis&gt;dis))?/.freeze
+
+  def initialize(command)
+    @match_data = REGEX.match(command)
+  end
+
+  def count
+    [@match_data["count"].to_i, 1].max
+  end
+
+  def dice
+    @match_data["dice"].to_i
+  end
+
+  def modifier
+    @match_data["modifier"].to_i
+  end
+
+  def advantage
+    !@match_data["adv"].nil?
+  end
+
+  def disadvantage
+    !@match_data["dis"].nil?
+  end
+
+  def roll
+    return result unless advantage || disadvantage
+    return result if advantage &amp;&amp; disadvantage
+
+    operator = advantage ? :max : :min
+    [result, result].send operator
+  end
+
+  private
+
+  def result
+    count.times.reduce(0) do |sum|
+      sum + rand(dice) + 1
+    end + modifier
+  end
+end
+
+parser = Parser.new(query)
+
+print parser.roll</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>13819882-0F9E-45E6-B8D2-54544CA9D160</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>r</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Roll dice</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>8E0FF21A-8EF6-40F4-A706-C750B366B63D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>6945E58A-206F-4B39-AE1B-109D65F5CABF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Roll dice.
+
+r d20 # Rolls a d20
+r 2d8 # Rolls 2d8
+r 4d6+3 # Rolls 4d6 and adds 3
+r d20-2 # Rolls a d20 and subtracts 2
+r d20 adv # Rolls a d20 twice and chooses highest
+r d20 dis # Rolls a d20 twice and chooses lowest
+r 8d120-32 adv dis # Rolls 8d120 and subtracts 32, adv and dis cancel out</string>
+	<key>uidata</key>
+	<dict>
+		<key>13819882-0F9E-45E6-B8D2-54544CA9D160</key>
+		<dict>
+			<key>xpos</key>
+			<integer>250</integer>
+			<key>ypos</key>
+			<integer>210</integer>
+		</dict>
+		<key>6945E58A-206F-4B39-AE1B-109D65F5CABF</key>
+		<dict>
+			<key>xpos</key>
+			<integer>400</integer>
+			<key>ypos</key>
+			<integer>210</integer>
+		</dict>
+		<key>8E0FF21A-8EF6-40F4-A706-C750B366B63D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>100</integer>
+			<key>ypos</key>
+			<integer>210</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
